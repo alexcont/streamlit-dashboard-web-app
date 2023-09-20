@@ -2,7 +2,7 @@
 
 This project includes a data visualization and analysis application built using Streamlit. The application allows users to upload CSV or Excel files and analyze and visualize the data.
 
-![Application Screenshot](file:///C:/Users/ahmet/Downloads/table.png)
+![table](https://github.com/ahmetdzdrr/streamlit-dashboard-web-app/assets/117534684/1f57c327-3141-4e7b-a689-44f35e9337fe)
 
 ## Getting Started
 
