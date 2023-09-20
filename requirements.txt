@@ -1,0 +1,6 @@
+streamlit-option-menu
+time
+streamlit
+pandas
+plotly
+openpyxl
