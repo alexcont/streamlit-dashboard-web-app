@@ -21,6 +21,8 @@ You can install the requirements using the following commands:
 
     ```pip install -r requirements.txt
 
+*******************************************
+
 ### Installation
 
 To run the project on your local machine, follow these steps:
@@ -35,6 +37,7 @@ To run the project on your local machine, follow these steps:
 
 3. Open your web browser and navigate to http://localhost:8501 to view the application.
 
+*******************************************
 
 ### Usage
 
@@ -44,6 +47,7 @@ Using the application is straightforward:
 - In the "About" tab, you can access information about the uploaded data.
 - In the "Visualization" tab, you'll find various charts and analyses to visualize the data.
 
+*******************************************
 
 ### Features
 
