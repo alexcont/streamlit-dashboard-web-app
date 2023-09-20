@@ -10,6 +10,10 @@ To run the project on your local machine, follow these steps:
 
 ### Prerequisites
 
+You can download and try the application from the link below since I prepared the application based on a sample dataset:
+
+- Dataset link: https://docs.google.com/spreadsheets/d/1jM8S48LYB6Mc9wt2FZ0aVc8wNsYkE_yO/edit?usp=sharing&ouid=110482222185106823983&rtpof=true&sd=true
+
 You'll need the following prerequisites to run the project:
 
 - Python
