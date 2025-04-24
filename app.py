@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import io
 
 st.set_page_config(page_title="Dashboard de Datos y Video", layout="wide")
 st.title("📊 Dashboard interactivo de Excel + 🎥 Video")
@@ -10,14 +9,21 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.header("📈 Gráficas")
-    archivo_excel = st.file_uploader("📂 Sube un archivo Excel", type=["xlsx", "xls"])
+    archivos_excel = st.file_uploader(
+        "📂 Sube archivos Excel (puedes seleccionar varios)",
+        type=["xlsx", "xls"],
+        accept_multiple_files=True
+    )
 
-    if archivo_excel:
-        df = pd.read_excel(archivo_excel)
+    if archivos_excel:
+        nombres_excel = [file.name for file in archivos_excel]
+        seleccionado = st.selectbox("Selecciona un archivo para graficar", nombres_excel)
+        archivo_seleccionado = next(file for file in archivos_excel if file.name == seleccionado)
+        df = pd.read_excel(archivo_seleccionado)
+
         columnas = df.columns.tolist()
-
-        x_col = st.selectbox("📌 Columna X", columnas)
-        y_col = st.selectbox("📌 Columna Y", columnas)
+        x_col = st.selectbox("📌 Columna X", columnas, index=0)
+        y_col = st.selectbox("📌 Columna Y", columnas, index=1 if len(columnas) > 1 else 0)
 
         if x_col and y_col:
             fig = px.line(
@@ -41,7 +47,7 @@ with col1:
             st.download_button(
                 label="⬇️ Descargar datos CSV",
                 data=csv,
-                file_name="datos_filtrados.csv",
+                file_name=f"{seleccionado}_datos_filtrados.csv",
                 mime="text/csv"
             )
 
@@ -49,9 +55,16 @@ with col1:
         st.dataframe(df, use_container_width=True)
 
 with col2:
-    st.header("🎬 Video")
-    video_file = st.file_uploader("🎞️ Sube un video (.mp4, .mov)", type=["mp4", "mov"])
+    st.header("🎬 Videos")
+    archivos_video = st.file_uploader(
+        "🎞️ Sube archivos de video (.mp4, .mov) (varios)",
+        type=["mp4", "mov"],
+        accept_multiple_files=True
+    )
 
-    if video_file:
-        st.subheader("Video cargado")
-        st.video(video_file)
+    if archivos_video:
+        nombres_video = [file.name for file in archivos_video]
+        seleccionado_vid = st.selectbox("Selecciona un video para reproducir", nombres_video)
+        video_seleccionado = next(file for file in archivos_video if file.name == seleccionado_vid)
+        st.subheader(f"Reproduciendo: {seleccionado_vid}")
+        st.video(video_seleccionado)
