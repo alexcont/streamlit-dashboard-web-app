@@ -16,11 +16,8 @@ with col1:
         df = pd.read_excel(archivo_excel)
         columnas = df.columns.tolist()
 
-        default_x = columnas[0] if len(columnas) > 0 else None
-        default_y = columnas[1] if len(columnas) > 1 else None
-
-        x_col = st.selectbox("📌 Columna X", columnas, index=0 if default_x else None)
-        y_col = st.selectbox("📌 Columna Y", columnas, index=1 if default_y else None)
+        x_col = st.selectbox("📌 Columna X", columnas)
+        y_col = st.selectbox("📌 Columna Y", columnas)
 
         if x_col and y_col:
             fig = px.line(
