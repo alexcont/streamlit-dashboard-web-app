@@ -2,9 +2,6 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import io
-import os
-import tempfile
-import cv2
 
 st.set_page_config(page_title="Dashboard de Datos y Video", layout="wide")
 st.title("📊 Dashboard interactivo de Excel + 🎥 Video")
@@ -57,23 +54,3 @@ with col2:
     if video_file:
         st.subheader("Video cargado")
         st.video(video_file)
-
-        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-            tmp_file.write(video_file.read())
-            tmp_path = tmp_file.name
-
-        try:
-            cap = cv2.VideoCapture(tmp_path)
-            if cap.isOpened():
-                frames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-                fps = cap.get(cv2.CAP_PROP_FPS)
-                duration = frames / fps if fps > 0 else 0
-                minutes = int(duration // 60)
-                seconds = int(duration % 60)
-                st.write(f"📁 Nombre del archivo: `{video_file.name}`")
-                st.write(f"⏱️ Duración: {minutes} min {seconds} seg")
-            cap.release()
-        except Exception as e:
-            st.warning(f"⚠️ No se pudo obtener información del video: {e}")
-        finally:
-            os.remove(tmp_path)
