@@ -14,12 +14,13 @@ with col1:
 
     if archivo_excel:
         df = pd.read_excel(archivo_excel)
-        st.subheader("👁️ Vista previa de datos")
-        st.dataframe(df, use_container_width=True)
-
         columnas = df.columns.tolist()
-        x_col = st.selectbox("📌 Columna X", columnas)
-        y_col = st.selectbox("📌 Columna Y", columnas)
+
+        default_x = columnas[0] if len(columnas) > 0 else None
+        default_y = columnas[1] if len(columnas) > 1 else None
+
+        x_col = st.selectbox("📌 Columna X", columnas, index=0 if default_x else None)
+        y_col = st.selectbox("📌 Columna Y", columnas, index=1 if default_y else None)
 
         if x_col and y_col:
             fig = px.line(
@@ -46,6 +47,9 @@ with col1:
                 file_name="datos_filtrados.csv",
                 mime="text/csv"
             )
+
+        st.subheader("👁️ Vista previa de datos")
+        st.dataframe(df, use_container_width=True)
 
 with col2:
     st.header("🎬 Video")
