@@ -59,4 +59,4 @@ with col2:
         for video in video_file:
             st.subheader(f"Video: {video.name}")
             video_bytes = video.read()
-            st.video(video_bytes, start_time=0, volume=0.1)  # Volumen al 10%
+            st.video(video_bytes)  # Sin ajustar el volumen
